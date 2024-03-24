@@ -6,6 +6,7 @@ import 'package:ecommerceapp/ui/views/addcard/addcard_view.dart';
 import 'package:ecommerceapp/ui/views/home/home_view.dart';
 import 'package:ecommerceapp/ui/views/itemdetail/item_detail.dart';
 import 'package:ecommerceapp/ui/views/login/login_view.dart';
+import 'package:ecommerceapp/ui/views/profileedit/edit_view.dart';
 import 'package:ecommerceapp/ui/views/signup/signup_view.dart';
 import 'package:ecommerceapp/ui/views/usercheck/usercheck.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -19,6 +20,7 @@ import 'package:stacked_services/stacked_services.dart';
   MaterialRoute(page: NavbarView),
   MaterialRoute(page: ItemDetailView),
   MaterialRoute(page: AddCardView),
+  MaterialRoute(page: EditView),
 ], dependencies: [
   Singleton(classType: NavigationService),
   LazySingleton(classType: FireBaseAuthServices),

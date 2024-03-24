@@ -1,6 +1,5 @@
 import 'package:ecommerceapp/ui/views/signup/signup_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 
 class SignUpView extends StatelessWidget {

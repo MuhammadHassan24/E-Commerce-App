@@ -22,15 +22,54 @@ class ProfileView extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 60,
+                          child: Center(
+                            child: Icon(
+                              Icons.person,
+                              size: 50,
+                            ),
+                          ),
                         ),
+                        Positioned(
+                            child: IconButton.filledTonal(
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStatePropertyAll(Colors.amber)),
+                                padding: EdgeInsets.only(left: 2),
+                                onPressed: () {},
+                                icon: Icon(Icons.camera_alt_rounded)))
                       ]),
                 ),
               ),
               SizedBox(
-                height: 25,
+                height: 30,
+              ),
+              Center(
+                child: InkWell(
+                  onTap: () {
+                    viewModel.goToEditPage();
+                  },
+                  customBorder: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Container(
+                    height: 35,
+                    width: 80,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(width: 1)),
+                    child: Center(
+                        child: Text(
+                      "Edit",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    )),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 35,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 50),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,17 +87,6 @@ class ProfileView extends StatelessWidget {
                     Container(
                       child: Text(
                         "Location",
-                        style: TextStyle(fontSize: 22),
-                      ),
-                      decoration: BoxDecoration(
-                          border: Border(bottom: BorderSide(width: 2))),
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Container(
-                      child: Text(
-                        "Name",
                         style: TextStyle(fontSize: 22),
                       ),
                       decoration: BoxDecoration(

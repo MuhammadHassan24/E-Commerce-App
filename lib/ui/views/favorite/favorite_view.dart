@@ -11,12 +11,22 @@ class FavoriteView extends StatelessWidget {
     return ViewModelBuilder.reactive(
         viewModelBuilder: () => FavoriteViewModel(),
         builder: (context, viewModel, child) {
-          return GridView.builder(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-              itemBuilder: (con, ind) {
-                return Container();
-              });
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisExtent: 250,
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16),
+                itemBuilder: (con, ind) {
+                  return GestureDetector(
+                      onTap: () => viewModel.goToDetails(),
+                      child: GridContainer());
+                }),
+          );
         });
   }
 }

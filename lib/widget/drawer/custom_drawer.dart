@@ -17,37 +17,7 @@ class CustomDrawer extends StatelessWidget {
           return Drawer(
             width: 280,
             child: Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    onIndexChanged(0);
-                    viewModel.goBack();
-                    // Change index to 0 (Home)
-                  },
-                  child: Text("Home"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    onIndexChanged(2);
-                    viewModel.goBack(); // Change index to 2 (Favorite)
-                  },
-                  child: Text("Favorite"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    onIndexChanged(3);
-                    viewModel.goBack(); // Change index to 3 (Profile)
-                  },
-                  child: Text("Profile"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    onIndexChanged(1);
-                    viewModel.goBack(); // Change index to 1 (Search)
-                  },
-                  child: Text("Search"),
-                ),
-              ],
+              children: [],
             ),
           );
         });

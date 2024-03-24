@@ -12,12 +12,18 @@ class LoginViewModel extends BaseViewModel {
   final email = TextEditingController();
   final password = TextEditingController();
 
-  // @override
-  // void dispose() {
-  //   email.dispose();
-  //   password.dispose();
-  //   super.dispose();
-  // }
+  userLogin() async {
+    await _authservice.loginUser(email.text, password.text);
+    email.clear();
+    password.clear();
+    return goToNavbar();
+  }
+
+  submit() {
+    if (formkey.currentState!.validate()) {
+      return userLogin();
+    }
+  }
 
   String? emailValidation(value) {
     RegExp validEmail = RegExp(
@@ -37,19 +43,6 @@ class LoginViewModel extends BaseViewModel {
       {
         return null;
       }
-    }
-  }
-
-  userLogin() async {
-    await _authservice.loginUser(email.text, password.text);
-    email.clear();
-    password.clear();
-    return goToNavbar();
-  }
-
-  submit() {
-    if (formkey.currentState!.validate()) {
-      return userLogin();
     }
   }
 

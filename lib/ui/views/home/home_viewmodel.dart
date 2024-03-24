@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class HomeViewModel extends BaseViewModel {
+class HomeViewModel extends FutureViewModel {
   final _navigationservice = locator<NavigationService>();
   final CounterServices counterService = locator<CounterServices>();
   final _authservice = locator<FireBaseAuthServices>();
@@ -54,8 +54,6 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
-  List<ListenableServiceMixin> get listenableServices => [counterService];
-
   int get getCounter => counterService.counter;
 
   increment() {
@@ -69,4 +67,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   int send = 0;
+
+  @override
+  Future futureToRun() async {}
 }

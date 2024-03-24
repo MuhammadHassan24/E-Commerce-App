@@ -10,12 +10,13 @@ import 'package:ecommerceapp/ui/views/addcard/addcard_view.dart' as _i8;
 import 'package:ecommerceapp/ui/views/home/home_view.dart' as _i5;
 import 'package:ecommerceapp/ui/views/itemdetail/item_detail.dart' as _i7;
 import 'package:ecommerceapp/ui/views/login/login_view.dart' as _i3;
+import 'package:ecommerceapp/ui/views/profileedit/edit_view.dart' as _i9;
 import 'package:ecommerceapp/ui/views/signup/signup_view.dart' as _i4;
 import 'package:ecommerceapp/ui/views/usercheck/usercheck.dart' as _i2;
-import 'package:flutter/material.dart' as _i9;
+import 'package:flutter/material.dart' as _i10;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i10;
+import 'package:stacked_services/stacked_services.dart' as _i11;
 
 class Routes {
   static const userCheck = '/';
@@ -32,6 +33,8 @@ class Routes {
 
   static const addCardView = '/add-card-view';
 
+  static const editView = '/edit-view';
+
   static const all = <String>{
     userCheck,
     loginView,
@@ -40,6 +43,7 @@ class Routes {
     navbarView,
     itemDetailView,
     addCardView,
+    editView,
   };
 }
 
@@ -73,48 +77,61 @@ class StackedRouter extends _i1.RouterBase {
       Routes.addCardView,
       page: _i8.AddCardView,
     ),
+    _i1.RouteDef(
+      Routes.editView,
+      page: _i9.EditView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.UserCheck: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.UserCheck(),
         settings: data,
       );
     },
     _i3.LoginView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.LoginView(),
         settings: data,
       );
     },
     _i4.SignUpView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.SignUpView(),
         settings: data,
       );
     },
     _i5.HomeView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.HomeView(),
         settings: data,
       );
     },
     _i6.NavbarView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.NavbarView(),
         settings: data,
       );
     },
     _i7.ItemDetailView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.ItemDetailView(),
         settings: data,
       );
     },
     _i8.AddCardView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i8.AddCardView(),
+      final args = data.getArgs<AddCardViewArguments>(
+        orElse: () => const AddCardViewArguments(),
+      );
+      return _i10.MaterialPageRoute<dynamic>(
+        builder: (context) => _i8.AddCardView(key: args.key, data: args.data),
+        settings: data,
+      );
+    },
+    _i9.EditView: (data) {
+      return _i10.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i9.EditView(),
         settings: data,
       );
     },
@@ -127,7 +144,34 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i10.NavigationService {
+class AddCardViewArguments {
+  const AddCardViewArguments({
+    this.key,
+    this.data,
+  });
+
+  final _i10.Key? key;
+
+  final dynamic data;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "data": "$data"}';
+  }
+
+  @override
+  bool operator ==(covariant AddCardViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.data == data;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ data.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i11.NavigationService {
   Future<dynamic> navigateToUserCheck([
     int? routerId,
     bool preventDuplicates = true,
@@ -212,14 +256,31 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAddCardView([
+  Future<dynamic> navigateToAddCardView({
+    _i10.Key? key,
+    dynamic data,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.addCardView,
+        arguments: AddCardViewArguments(key: key, data: data),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToEditView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.addCardView,
+    return navigateTo<dynamic>(Routes.editView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -310,14 +371,31 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithAddCardView([
+  Future<dynamic> replaceWithAddCardView({
+    _i10.Key? key,
+    dynamic data,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.addCardView,
+        arguments: AddCardViewArguments(key: key, data: data),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithEditView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.addCardView,
+    return replaceWith<dynamic>(Routes.editView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

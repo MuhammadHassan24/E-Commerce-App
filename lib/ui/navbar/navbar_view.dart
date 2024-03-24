@@ -15,28 +15,29 @@ class NavbarView extends StatelessWidget {
         builder: (context, viewModel, child) {
           return SafeArea(
             child: Scaffold(
-              appBar: AppBar(
-                elevation: 2,
-                actions: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-                  IconButton(
-                    onPressed: () {
-                      viewModel.goToAddcard();
-                    },
-                    icon: viewModel.counterService.counter == 0
-                        ? Icon(Icons.shopping_cart_outlined)
-                        : badge.Badge(
-                            child: Icon((Icons.shopping_cart_outlined)),
-                            badgeContent: viewModel.badgeText(),
-                            badgeAnimation: badge.BadgeAnimation.scale(),
-                            badgeStyle: badge.BadgeStyle(
-                                padding: EdgeInsets.all(5),
-                                badgeColor: Colors.blue),
-                            position: badge.BadgePosition.custom(
-                                end: -7, bottom: 12)),
-                  ),
-                ],
-              ),
+              appBar: viewModel.currentIndex != 1
+                  ? AppBar(
+                      elevation: 2,
+                      actions: [
+                        IconButton(
+                          onPressed: () {
+                            viewModel.goToAddcard();
+                          },
+                          icon: viewModel.counterService.counter == 0
+                              ? Icon(Icons.shopping_cart_outlined)
+                              : badge.Badge(
+                                  child: Icon((Icons.shopping_cart_outlined)),
+                                  badgeContent: viewModel.badgeText(),
+                                  badgeAnimation: badge.BadgeAnimation.scale(),
+                                  badgeStyle: badge.BadgeStyle(
+                                      padding: EdgeInsets.all(5),
+                                      badgeColor: Colors.blue),
+                                  position: badge.BadgePosition.custom(
+                                      end: -7, bottom: 12)),
+                        ),
+                      ],
+                    )
+                  : null,
               drawer: CustomDrawer(
                 onIndexChanged: (newIndex) {
                   viewModel.setIndex(newIndex);
@@ -54,7 +55,7 @@ class NavbarView extends StatelessWidget {
                     child: child,
                     animation: animation,
                     secondaryAnimation: secondaryAnimation,
-                    transitionType: SharedAxisTransitionType.vertical,
+                    transitionType: SharedAxisTransitionType.scaled,
                   );
                 },
                 child: viewModel.getView(viewModel.currentIndex),

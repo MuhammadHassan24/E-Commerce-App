@@ -35,7 +35,6 @@ class NavbarViewModel extends IndexTrackingViewModel {
 
   increment() {
     counterService.counter++;
-
     notifyListeners();
   }
 
@@ -51,8 +50,9 @@ class NavbarViewModel extends IndexTrackingViewModel {
   }
 
   goToAddcard() async {
-    await navigationservice.navigateTo(Routes.addCardView,
-        arguments: getCounter);
+    await navigationservice.navigateTo(
+      Routes.addCardView,
+    );
   }
 
   int send = 0;
